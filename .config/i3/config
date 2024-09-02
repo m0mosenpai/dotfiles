@@ -231,3 +231,6 @@ exec_always ~/.fehbg &
 
 # Launch Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Launch Picom
+exec_always picom -b
