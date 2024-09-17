@@ -33,7 +33,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -220,7 +220,7 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 # US Home Layout
 exec_always xrandr --newmode "2560x1440_75.00"  397.25  2560 2760 3040 3520  1440 1443 1448 1506 -hsync +vsync
 exec_always xrandr --addmode DP-3 2560x1440_75.00
-exec_always xrandr --output DP-3 --mode 2560x1440_75.00
+exec_always xrandr --output DP-3 --mode 2560x1440 --rate 75
 exec_always xrandr --output DP-3 --left-of eDP-1
 
 # Touchpad Settings
@@ -235,3 +235,6 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Launch Picom
 exec_always picom -b
+
+# Configure lockscreen
+bindsym Ctrl+$mod+l exec betterlockscreen -l dim

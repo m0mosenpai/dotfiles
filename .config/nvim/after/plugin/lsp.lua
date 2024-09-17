@@ -23,6 +23,10 @@ require('mason-lspconfig').setup({
   ensure_installed = {'clangd', 'pylsp', 'tsserver', 'rust_analyzer'},
   handlers = {
     function(server_name)
+      -- tmp fix for tsserver -> ts_ls name change
+      if server_name == "tsserver" then
+          server_name = "ts_ls"
+      end
       require('lspconfig')[server_name].setup({
         capabilities = lsp_capabilities,
       })
@@ -51,7 +55,13 @@ require('mason-lspconfig').setup({
 })
 
 local cmp = require('cmp')
+-- local cmp_autopairs = require('nvim-autopairs-completion.cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
+
+-- cmp.event:on(
+--     'confirm_done',
+--     cmp_autopairs.on_confirm_done()
+-- )
 
 cmp.setup({
   sources = cmp.config.sources({

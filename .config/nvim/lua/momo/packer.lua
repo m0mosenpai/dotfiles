@@ -38,7 +38,16 @@ return require('packer').startup(function(use)
   use({'hrsh7th/nvim-cmp'})
   use({'hrsh7th/cmp-nvim-lsp'})
   use({'hrsh7th/cmp-buffer'})
-  use({'saadparwaiz1/cmp_luasnicmp_luasnipp'})
+  use({'saadparwaiz1/cmp_luasnip'})
   use({'L3MON4D3/LuaSnip'})
+
+  -- Autopairing
+  use {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup {}
+        end
+    }
 
 end)
