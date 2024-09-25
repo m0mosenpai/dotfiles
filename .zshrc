@@ -134,3 +134,10 @@ export NVM_DIR="$HOME/.nvm"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# Aliases
+alias yeet="yay -R"
+alias fkb="xmodmap ~/.Xmodmap"
