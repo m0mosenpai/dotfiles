@@ -3,7 +3,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
     local opts = {buffer = event.buf}
 
+    -- goto function definition
     vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+    -- act like you're "hovering" over a piece of code
     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
@@ -70,6 +72,7 @@ cmp.setup({
   }, {
     {name = 'buffer'},
   }),
+  -- navigating autocomplete suggestions
   mapping = cmp.mapping.preset.insert({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
