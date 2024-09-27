@@ -211,18 +211,6 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 #        status_command i3status
 # }
 
-# Display Layout
-
-# India Home Layout
-# exec_always xrandr --output DP-1 --above eDP-1
-# exec_always xrandr --output DP-3 --right-of DP-1
-
-# US Home Layout
-exec_always xrandr --newmode "2560x1440_75.00"  397.25  2560 2760 3040 3520  1440 1443 1448 1506 -hsync +vsync
-exec_always xrandr --addmode DP-3 2560x1440_75.00
-exec_always xrandr --output DP-3 --mode 2560x1440 --rate 75
-exec_always xrandr --output DP-3 --left-of eDP-1
-
 # Touchpad Settings
 exec_always xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 exec_always xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
