@@ -20,6 +20,10 @@ font pango:monospace 10
 # Window gaps
 gaps inner 5
 
+# Remove title-bars and color the borders
+for_window [class="^.*"] border pixel 2
+client.focused #d07e00 #285577 #ffffff #f1da2a #d07e00
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -210,6 +214,9 @@ bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection c
 # bar {
 #        status_command i3status
 # }
+
+# Set monitors
+exec_always autorandr -c
 
 # Touchpad Settings
 exec_always xinput --set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
