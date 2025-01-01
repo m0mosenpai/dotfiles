@@ -1,0 +1,15 @@
+theme = rose-pine
+background = 0f0e16
+font-family = "Roboto Mono Nerd"
+font-size = 16
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+keybind = ctrl+shift+enter=new_window
+keybind = ctrl+shift+r=reload_config
+window-inherit-working-directory = true
+window-inherit-font-size = true
+window-decoration = false
+scrollback-limit = 10000000
