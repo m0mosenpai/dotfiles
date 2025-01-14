@@ -22,7 +22,7 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'clangd', 'pylsp', 'ts_ls', 'rust_analyzer'},
+  ensure_installed = {'clangd', 'pyright', 'ts_ls', 'rust_analyzer'},
   handlers = {
     function(server_name)
       -- tmp fix for tsserver -> ts_ls name change
