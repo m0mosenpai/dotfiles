@@ -58,8 +58,8 @@ bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOUR
 bindsym XF86AudioNext exec --no-startup-id pactl next && $refresh_i3status
 bindsym XF86AudioPrev exec --no-startup-id pactl previous && $refresh_i3status
 bindsym XF86AudioPlay exec --no-startup-id pactl play-pause && $refresh_i3status
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod

@@ -141,3 +141,6 @@ source <(fzf --zsh)
 # Aliases
 alias yeet="yay -R"
 alias fkb="xmodmap ~/.Xmodmap"
+
+# Firefox Gestures
+export MOZ_USE_XINPUT2=1
