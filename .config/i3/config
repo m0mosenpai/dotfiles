@@ -43,12 +43,6 @@ exec --no-startup-id dex --autostart --environment i3
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust playback in PulseAudio.
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
 # Using wpctl to adjust playback in WirePlumber.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 2%+ && $refresh_i3status
@@ -234,3 +228,9 @@ exec_always picom -b
 
 # Configure lockscreen
 bindsym Ctrl+$mod+l exec betterlockscreen -l dim
+
+# Autostart apps
+exec --no-startup-id spotify
+
+# Assign workspaces
+for_window [class="Spotify"] move --no-auto-back-and-forth container to workspace $ws3

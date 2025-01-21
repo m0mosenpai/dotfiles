@@ -1,7 +1,7 @@
 theme = rose-pine
 background = 0f0e16
 font-family = "Roboto Mono Nerd"
-font-size = 16
+font-size = 15
 
 cursor-style = block
 cursor-style-blink = false

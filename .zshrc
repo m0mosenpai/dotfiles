@@ -144,3 +144,6 @@ alias fkb="xmodmap ~/.Xmodmap"
 
 # Firefox Gestures
 export MOZ_USE_XINPUT2=1
+
+# lf
+export EDITOR='nvim'
