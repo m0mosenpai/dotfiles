@@ -1,5 +1,6 @@
 function ColorConfig(color)
-	color = color or "kanagawa-dragon"
+	-- color = color or "kanagawa-dragon"
+	color = color or "vague"
 	-- color = color or "rose-pine"
 	vim.cmd.colorscheme(color)
 
