@@ -33,5 +33,8 @@ vim.opt.isfname:append("@-@")
 -- faster updates
 vim.opt.updatetime = 50
 
+-- max line length indicator
+vim.opt.colorcolumn = "80"
+
 -- setting the leader key
 vim.g.mapleader = " "
