@@ -135,15 +135,19 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Set up fzf key bindings and fuzzy completion
+# fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-# Aliases
+# aliases
 alias yeet="yay -R"
 alias fkb="xmodmap ~/.Xmodmap"
 
-# Firefox Gestures
+# firefox Gestures
 export MOZ_USE_XINPUT2=1
 
 # lf
 export EDITOR='nvim'
+
+# spark
+export SPARK_HOME=/home/momo/UW-Madison/Courses/cs-744_big-data-systems/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
