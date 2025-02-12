@@ -151,3 +151,6 @@ export EDITOR='nvim'
 # spark
 export SPARK_HOME=/home/momo/UW-Madison/Courses/cs-744_big-data-systems/spark
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+# java
+export JAVA_HOME=/usr/lib/jvm/default
