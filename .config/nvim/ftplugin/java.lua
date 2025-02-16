@@ -16,7 +16,7 @@ local config = {
         '-jar', '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar',
         -- IMP: allow process to access config_linux directory
         '-configuration', '/usr/share/java/jdtls/config_linux',
-        '-data', vim.fn.expand('~/.cache/jdtls-workspace') .. workspace_dir,
+        '-data', vim.fn.expand('~/.cache/jdtls-workspace/') .. workspace_dir,
     },
     root_dir = require('jdtls.setup').find_root({'gradlew', '.git', 'mvnw'}),
     capabilities=capabilities,
@@ -32,6 +32,11 @@ local config = {
                         name = "JavaSE-17",
                         path = "/usr/lib/jvm/java-17-openjdk/",
                     }
+                }
+            },
+            format = {
+                settings = {
+                    url = '/tmp/eclipse-cs300-style.xml',
                 }
             }
         }
