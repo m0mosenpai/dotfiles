@@ -10,6 +10,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- this ensures the cursor doesn't jump the end of the line after it
 vim.keymap.set("n", "J", "mzJ`z")
 
+-- launch ~/.local/bin/scripts/tmux-sessionizer in a new tmp window
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
 -- half page jump scrolling keeping the cursor in the middle
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

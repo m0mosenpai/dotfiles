@@ -13,3 +13,5 @@ window-inherit-working-directory = true
 window-inherit-font-size = true
 window-decoration = false
 scrollback-limit = 10000000
+
+confirm-close-surface = false

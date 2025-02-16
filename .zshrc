@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="fishy"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -122,9 +122,8 @@ setopt HIST_FIND_NO_DUPS
 # Ignore duplicates at the time of writing
 setopt HIST_IGNORE_ALL_DUPS
 
-
-# Created by `pipx` on 2024-08-06 08:04:56
 export PATH="$PATH:/home/momo/.local/bin"
+export PATH="$PATH:/home/momo/.local/bin/scripts"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -154,3 +153,8 @@ export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 # java
 export JAVA_HOME=/usr/lib/jvm/default
+
+# tmux
+# if [ -x "$(command -v tmux -2)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+#     exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+# fi
