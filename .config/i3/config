@@ -49,9 +49,9 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1.5 @DEFAU
 bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && $refresh_i3status
-bindsym XF86AudioNext exec --no-startup-id pactl next && $refresh_i3status
-bindsym XF86AudioPrev exec --no-startup-id pactl previous && $refresh_i3status
-bindsym XF86AudioPlay exec --no-startup-id pactl play-pause && $refresh_i3status
+bindsym XF86AudioNext exec --no-startup-id playerctl next && $refresh_i3status
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous && $refresh_i3status
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && $refresh_i3status
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 
@@ -228,6 +228,13 @@ exec_always picom -b
 
 # Configure lockscreen
 bindsym Ctrl+$mod+l exec betterlockscreen -l dim
+
+# Configure zoom windows (https://www.reddit.com/r/i3wm/comments/m27dwc/comment/ktncv6c/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+# for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
+# for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Free Account"] floating disable
+# for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+# for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Webinar"] floating disable
 
 # Autostart apps
 exec --no-startup-id spotify
