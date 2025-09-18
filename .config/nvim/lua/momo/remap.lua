@@ -32,3 +32,6 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+-- jump back to file A if "goto definition" was in file B
+vim.keymap.set("n", "gb", "<C-t>")
