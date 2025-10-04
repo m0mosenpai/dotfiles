@@ -18,3 +18,6 @@ fi
 
 # focus on the terminal
 i3-msg 'workspace number 2'
+
+# relaunch polybar
+~/.config/polybar/launch.sh &
