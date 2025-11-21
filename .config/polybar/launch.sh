@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 # terminate any running instances
-killall -9 polybar
+killall -q polybar
+pkill -f scroll_spotify_status.sh
+pkill -f get_spotify_status.sh
 
 # wait for polybar processes to shut down
-while pgrep -u $(id -u) -x polybar >/dev/null; do sleep 0.1; done
-sleep 1
+while pgrep -u $(id -u) -x polybar >/dev/null; do sleep 1; done
 
 # launch polybar on all connected displays
 if type "xrandr" > /dev/null 2>&1; then
