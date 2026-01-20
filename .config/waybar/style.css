@@ -1,0 +1,369 @@
+/* Waybar Style - Firewatch Theme */
+/* Wallust color palette from Firewatch wallpaper */
+
+/* Color Variables:
+ * Background:       #171717
+ * Foreground:       #F9D9A8
+ * Primary Accent:   #ED9207 (bright orange)
+ * Secondary Accent: #EEC07A (golden)
+ * Muted:            #957E5D (tan)
+ * Group BG:         #312311 (dark brown)
+ * Border:           #604924 (mid brown)
+ * Tooltip BG:       #192134 (dark blue)
+ * Critical:         #CC241D (red)
+ */
+
+* {
+    font-family: "HackNerdFontMono";
+    font-size: 10pt;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background-color: #0c0a06;
+    color: #F9D9A8;
+    border-radius: 8px;
+}
+
+/* Add margin to all modules so borders don't touch waybar edge */
+#clock,
+#workspaces,
+#custom-spotify,
+#custom-spotify-prev,
+#custom-spotify-next,
+#bluetooth,
+#network,
+#custom-pulseaudio-input,
+#pulseaudio,
+#cpu,
+#memory,
+#disk,
+#tray,
+#battery {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* ===== MODULE GROUPS - PILL SHAPES ===== */
+
+/* Left group: Clock + Workspaces */
+#clock {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 8px 0 0 8px;
+    padding: 0 8px 0 10px;
+    margin-left: 4px;
+    color: #ED9207;
+    border-left: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#clock:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+}
+
+#workspaces {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 0 8px 8px 0;
+    padding: 0 4px;
+    border-right: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    color: #957E5D;
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+    margin: 3px 1px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background-color: rgba(237, 146, 7, 0.2);
+    color: #EEC07A;
+}
+
+#workspaces button.active {
+    background-color: #ED9207;
+    color: #171717;
+}
+
+#workspaces button.urgent {
+    background-color: #CC241D;
+    color: #F9D9A8;
+}
+
+/* ===== CENTER GROUP - SPOTIFY ===== */
+/* Layout: [prev] [song name] [next] */
+
+#custom-spotify-prev {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 8px 0 0 8px;
+    padding: 0 8px 0 10px;
+    color: #ED9207;
+    border-left: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#custom-spotify-prev:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#custom-spotify {
+    background-color: rgba(20, 15, 8, 0.85);
+    padding: 0 10px;
+    color: #EEC07A;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#custom-spotify:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#custom-spotify-next {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 0 8px 8px 0;
+    padding: 0 10px 0 8px;
+    color: #ED9207;
+    border-right: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#custom-spotify-next:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+/* ===== RIGHT GROUPS ===== */
+
+/* Connectivity group: Bluetooth + Network */
+#bluetooth {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 8px 0 0 8px;
+    padding: 0 6px 0 10px;
+    color: #ED9207;
+    border-left: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#bluetooth:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: #957E5D;
+}
+
+#bluetooth.connected {
+    color: #EEC07A;
+}
+
+#network {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 0 8px 8px 0;
+    padding: 0 10px 0 6px;
+    color: #ED9207;
+    border-right: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+}
+
+#network:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#network.disconnected {
+    color: #957E5D;
+}
+
+/* Audio group: Mic + Volume */
+#custom-pulseaudio-input {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 8px 0 0 8px;
+    padding: 0 6px 0 10px;
+    color: #ED9207;
+    border-left: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#custom-pulseaudio-input:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#pulseaudio {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 0 8px 8px 0;
+    padding: 0 10px 0 6px;
+    color: #ED9207;
+    border-right: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+}
+
+#pulseaudio:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#pulseaudio.muted {
+    color: #957E5D;
+}
+
+/* System group: CPU + RAM + Disk */
+#cpu {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 8px 0 0 8px;
+    padding: 0 6px 0 10px;
+    color: #ED9207;
+    border-left: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#cpu:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#memory {
+    background-color: rgba(20, 15, 8, 0.85);
+    padding: 0 6px;
+    color: #ED9207;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#memory:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#disk {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 0 8px 8px 0;
+    padding: 0 10px 0 6px;
+    color: #ED9207;
+    border-right: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+}
+
+#disk:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+/* Tray */
+#tray {
+    background-color: rgba(20, 15, 8, 0.85);
+    padding: 0 8px;
+    margin-left: 5px;
+    color: #ED9207;
+    border: 1px solid #604924;
+    border-radius: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* Battery - standalone pill */
+#battery {
+    background-color: rgba(20, 15, 8, 0.85);
+    border-radius: 8px;
+    padding: 0 10px;
+    margin-right: 4px;
+    color: #ED9207;
+    border: 2px solid #604924;
+    border-top: 1px solid #604924;
+    border-bottom: 1px solid #604924;
+    transition: all 0.2s ease;
+}
+
+#battery:hover {
+    background-color: rgba(35, 25, 12, 0.9);
+    color: #EEC07A;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #EEC07A;
+}
+
+#battery.warning {
+    color: #ED9207;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #CC241D;
+    color: #F9D9A8;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #F9D9A8;
+        color: #CC241D;
+    }
+}
+
+/* ===== TOOLTIP STYLING ===== */
+
+tooltip {
+    background-color: #192134;
+    border: 1px solid #604924;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: #F9D9A8;
+    padding: 4px 8px;
+}
+
+/* ===== LABEL FOCUS ===== */
+
+label:focus {
+    background-color: #171717;
+}

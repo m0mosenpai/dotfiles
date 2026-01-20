@@ -125,24 +125,43 @@ setopt HIST_IGNORE_ALL_DUPS
 export PATH="$PATH:/home/momo/.local/bin"
 export PATH="$PATH:/home/momo/.local/bin/scripts"
 
+# Lazy-load NVM for faster shell startup
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+lazy_load_nvm() {
+    unset -f nvm node npm npx claude
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+nvm() { lazy_load_nvm && nvm "$@"; }
+node() { lazy_load_nvm && node "$@"; }
+npm() { lazy_load_nvm && npm "$@"; }
+npx() { lazy_load_nvm && npx "$@"; }
+claude() { lazy_load_nvm && claude "$@"; }
 
-# pyenv
+# Lazy-load pyenv for faster shell startup
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+lazy_load_pyenv() {
+    unset -f pyenv python python3 pip pip3
+    eval "$(pyenv init -)"
+}
+pyenv() { lazy_load_pyenv && pyenv "$@"; }
+python() { lazy_load_pyenv && python "$@"; }
+python3() { lazy_load_pyenv && python3 "$@"; }
+pip() { lazy_load_pyenv && pip "$@"; }
+pip3() { lazy_load_pyenv && pip3 "$@"; }
 
 # fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
 # aliases
 alias yeet="yay -R"
-alias fkb="xmodmap ~/.Xmodmap"
+# alias spotify="LD_PRELOAD=/usr/lib/spotifywm.so /usr/bin/spotify"
+# X11 only - not needed on Wayland
+# alias fkb="xmodmap ~/.Xmodmap"
 
-# firefox Gestures
-export MOZ_USE_XINPUT2=1
+# firefox Gestures (X11 only - Wayland uses native input)
+# export MOZ_USE_XINPUT2=1
 
 # lf
 export EDITOR='nvim'

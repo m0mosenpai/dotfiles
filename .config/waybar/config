@@ -1,0 +1,143 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 0,
+    "margin-top": 4,
+    "margin-left": 4,
+    "margin-right": 4,
+
+    "modules-left": ["clock", "hyprland/workspaces", "tray"],
+    "modules-center": [
+        "custom/spotify-prev",
+        "custom/spotify",
+        "custom/spotify-next"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "custom/pulseaudio-input",
+        "pulseaudio",
+        "bluetooth",
+        "network",
+        "battery"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "clock": {
+        "format": "<span size='large'></span> {:%H:%M}",
+        "format-alt": "<span size='large'></span> {:%Y-%m-%d %H:%M:%S}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "interval": 1
+    },
+
+    "custom/spotify": {
+        "exec": "~/.config/waybar/scripts/scroll_spotify_status.sh",
+        "exec-on-event": false,
+        "format": "{}",
+        "escape": true,
+        "tooltip": false,
+        "on-click": "playerctl -p spotify play-pause"
+    },
+
+    "custom/spotify-prev": {
+        "format": "<span size='large'>󰒮</span>",
+        "on-click": "playerctl -p spotify previous",
+        "tooltip": false
+    },
+
+    "custom/spotify-next": {
+        "format": "<span size='large'>󰒭</span>",
+        "on-click": "playerctl -p spotify next",
+        "tooltip": false
+    },
+
+    "bluetooth": {
+        "format": "<span size='x-large'>󰂯</span>",
+        "format-connected": "<span size='x-large'>󰂱</span><span rise='1500'> {device_alias}</span>",
+        "format-connected-battery": "<span size='x-large'>󰂱</span><span rise='1500'> {device_alias}</span>",
+        "format-disabled": "<span size='x-large'>󰂲</span>",
+        "format-off": "<span size='x-large'>󰂲</span>",
+        "on-click": "~/.config/waybar/scripts/wofi-bluetooth.sh",
+        "on-click-right": "blueman-manager",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+
+    "network": {
+        "interface": "wl*",
+        "format-wifi": "<span size='x-large'>󰤨</span><span rise='1500'> {essid}</span>",
+        "format-disconnected": "<span size='x-large'>󰤭</span><span rise='1500'> Disconnected</span>",
+        "format-ethernet": "<span size='x-large'>󰈀</span><span rise='1500'> {ifname}</span>",
+        "on-click": "~/.config/waybar/scripts/wofi-wifi.sh",
+        "on-click-right": "nm-connection-editor",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n{bandwidthUpBits} up / {bandwidthDownBits} down"
+    },
+
+    "custom/pulseaudio-input": {
+        "exec": "~/.config/waybar/scripts/pulseaudio_input.sh",
+        "interval": 1,
+        "return-type": "",
+        "format": "{}",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "~/.config/waybar/scripts/wofi-audio.sh input",
+        "tooltip": false
+    },
+
+    "pulseaudio": {
+        "format": "<span size='x-large'>{icon}</span><span rise='1500'> {volume}%</span>",
+        "format-muted": "<span size='x-large'>󰝟</span><span rise='1500'> Muted</span>",
+        "format-icons": {
+            "headphone": "󰋋",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "~/.config/waybar/scripts/wofi-audio.sh output",
+        "on-scroll-up": "wpctl set-volume -l 1.3 @DEFAULT_AUDIO_SINK@ 2%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
+    },
+
+    "cpu": {
+        "format": "<span size='x-large'>󰻠</span><span rise='1500'> {usage}%</span>",
+        "interval": 2,
+        "on-click": "ghostty -e htop"
+    },
+
+    "memory": {
+        "format": "<span size='x-large'>󰍛</span><span rise='1500'> {percentage}%</span>",
+        "interval": 2,
+        "on-click": "ghostty -e htop"
+    },
+
+    "disk": {
+        "format": "<span size='large'>󰋊</span><span> {percentage_used}%</span>",
+        "path": "/"
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "interval": 5,
+        "full-at": 99,
+        "states": {
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "<span size='large'>{icon}</span> {capacity}%",
+        "format-charging": "<span size='large'>󰂄</span> {capacity}%",
+        "format-plugged": "<span size='large'>󰂄</span> {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    }
+}
