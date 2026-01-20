@@ -43,7 +43,7 @@ formatted+="󰤭 Disconnect\n"
 formatted+="󰑓 Rescan\n"
 
 # Show wofi menu
-chosen=$(echo -e "$formatted" | wofi --dmenu --prompt "WiFi" --width 300 --height 400)
+chosen=$(echo -e "$formatted" | wofi --dmenu --prompt "WiFi" --width 300 --height 400 --hide-search --location=3 --xoffset=-80 --yoffset=4 --style ~/.config/wofi/waybar-style.css)
 
 [ -z "$chosen" ] && exit 0
 
@@ -65,8 +65,8 @@ case "$chosen" in
             nmcli connection up "$ssid"
             notify-send "WiFi" "Connected to $ssid"
         else
-            # Need password - prompt with wofi
-            password=$(echo "" | wofi --dmenu --prompt "Password for $ssid" --password --width 300)
+            # Need password - prompt with zenity
+            password=$(zenity --password --title="WiFi Password" --text="Enter password for $ssid")
 
             if [ -n "$password" ]; then
                 if nmcli device wifi connect "$ssid" password "$password"; then

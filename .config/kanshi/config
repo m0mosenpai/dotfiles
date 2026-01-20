@@ -1,13 +1,25 @@
 # Kanshi display profiles
 # Run `hyprctl monitors all` to see connected outputs and modes
 
+output "Samsung Electric Company SAMSUNG 0x00000001" {
+  mode 2560x1440
+  position 0,0
+  alias $HOME_MONITOR
+}
+
+output "Sharp Corporation 0x149A Unknown" {
+  mode 1920x1080
+  position 2560,0
+  alias $INTERNAL
+}
+
 profile laptop {
-    output eDP-1 mode 1920x1080@60Hz position 0,0
+    output $INTERNAL enable
 }
 
 profile us-home {
-    output DP-3 mode 2560x1440@75Hz position 0,0
-    output eDP-1 mode 1920x1080@60Hz position 2560,0
+    output $HOME_MONITOR enable
+    output $INTERNAL enable
     exec hyprctl dispatch moveworkspacetomonitor 1 DP-3
     exec hyprctl dispatch moveworkspacetomonitor 2 DP-3
 }

@@ -37,7 +37,7 @@ else
 fi
 
 # Show wofi menu
-chosen=$(echo -e "$options" | wofi --dmenu --prompt "Bluetooth" --width 300 --height 400)
+chosen=$(echo -e "$options" | wofi --dmenu --prompt "Bluetooth" --width 300 --height 400 --hide-search --location=3 --xoffset=-80 --yoffset=4 --style ~/.config/wofi/waybar-style.css)
 
 [ -z "$chosen" ] && exit 0
 
@@ -76,7 +76,7 @@ case "$chosen" in
         done <<< "$devices"
 
         # Show device selection
-        selected=$(echo -e "$device_list" | cut -d'|' -f1 | wofi --dmenu --prompt "Select device" --width 300 --height 400)
+        selected=$(echo -e "$device_list" | cut -d'|' -f1 | wofi --dmenu --prompt "Select device" --width 300 --height 400 --hide-search --location=3 --xoffset=-80 --yoffset=4 --style ~/.config/wofi/waybar-style.css)
 
         [ -z "$selected" ] && exit 0
 

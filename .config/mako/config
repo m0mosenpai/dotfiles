@@ -1,0 +1,41 @@
+# Mako notification daemon - Firewatch Theme
+
+# Appearance
+font=HackNerdFontMono 10
+background-color=#0c0a06
+text-color=#F9D9A8
+border-color=#604924
+border-radius=4
+border-size=1
+padding=12
+margin=10
+
+# Position
+anchor=top-right
+
+# Behavior
+default-timeout=5000
+ignore-timeout=0
+max-visible=5
+sort=-time
+
+# Icons
+icon-path=/usr/share/icons/Adwaita
+max-icon-size=48
+
+# Urgency styles
+[urgency=low]
+background-color=#0c0a06
+text-color=#957E5D
+border-color=#604924
+
+[urgency=normal]
+background-color=#0c0a06
+text-color=#F9D9A8
+border-color=#ED9207
+
+[urgency=critical]
+background-color=#CC241D
+text-color=#F9D9A8
+border-color=#ED9207
+default-timeout=0
