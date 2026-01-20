@@ -59,11 +59,11 @@
     },
 
     "bluetooth": {
-        "format": "<span size='x-large'>󰂯</span>",
-        "format-connected": "<span size='x-large'>󰂱</span><span rise='1500'> {device_alias}</span>",
-        "format-connected-battery": "<span size='x-large'>󰂱</span><span rise='1500'> {device_alias}</span>",
-        "format-disabled": "<span size='x-large'>󰂲</span>",
-        "format-off": "<span size='x-large'>󰂲</span>",
+        "format": "<span size='large'>󰂯</span> Disconnected",
+        "format-connected": "<span size='large'>󰂱</span> {device_alias}",
+        "format-connected-battery": "<span size='large'>󰂱</span> {device_alias}",
+        "format-disabled": "<span size='large'>󰂲</span> Off",
+        "format-off": "<span size='large'>󰂲</span> Off",
         "on-click": "~/.config/waybar/scripts/wofi-bluetooth.sh",
         "on-click-right": "blueman-manager",
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
@@ -135,9 +135,9 @@
             "warning": 30,
             "critical": 20
         },
-        "format": "<span size='large'>{icon}</span> {capacity}%",
-        "format-charging": "<span size='large'>󰂄</span> {capacity}%",
-        "format-plugged": "<span size='large'>󰂄</span> {capacity}%",
+        "format": "<span size='medium'>{icon}</span> {capacity}%",
+        "format-charging": "<span size='medium'>󰂄</span> {capacity}%",
+        "format-plugged": "<span size='medium'>󰂄</span> {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     }
 }

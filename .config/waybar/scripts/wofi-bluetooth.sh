@@ -9,8 +9,8 @@ power_status=$(bluetoothctl show | grep "Powered:" | awk '{print $2}')
 options=""
 
 if [ "$power_status" = "yes" ]; then
-    options+="󰂲 Power Off\n"
-    options+="󰑓 Scan for devices\n"
+    options+="<span size='large'>󰂲</span> Power Off\n"
+    options+="<span size='x-large'>󰑓</span> Scan for devices\n"
     options+="───────────────\n"
 
     # Get paired devices
@@ -24,34 +24,34 @@ if [ "$power_status" = "yes" ]; then
             # Check if connected
             info=$(bluetoothctl info "$mac" 2>/dev/null)
             if echo "$info" | grep -q "Connected: yes"; then
-                options+="󰂱 $name (connected)\n"
+                options+="<span size='large'>󰂱</span> $name (connected)\n"
             else
-                options+="󰂯 $name\n"
+                options+="<span size='large'>󰂯</span> $name\n"
             fi
         done <<< "$paired"
     else
         options+="No paired devices\n"
     fi
 else
-    options+="󰂯 Power On\n"
+    options+="<span size='large'>󰂯</span> Power On\n"
 fi
 
 # Show wofi menu
-chosen=$(echo -e "$options" | wofi --dmenu --prompt "Bluetooth" --width 300 --height 400 --hide-search --location=3 --xoffset=-80 --yoffset=4 --style ~/.config/wofi/waybar-style.css)
+chosen=$(echo -e "$options" | wofi --dmenu --prompt "Bluetooth" --width 300 --height 400 --hide-search --location=3 --xoffset=-80 --yoffset=4 --style ~/.config/wofi/waybar-style.css --allow-markup)
 
 [ -z "$chosen" ] && exit 0
 
 # Handle selection
 case "$chosen" in
-    "󰂲 Power Off")
+    *"Power Off"*)
         bluetoothctl power off
         notify-send "Bluetooth" "Powered off"
         ;;
-    "󰂯 Power On")
+    *"Power On"*)
         bluetoothctl power on
         notify-send "Bluetooth" "Powered on"
         ;;
-    "󰑓 Scan for devices")
+    *"Scan for devices"*)
         notify-send "Bluetooth" "Scanning for 10 seconds..."
 
         # Start scanning
@@ -99,8 +99,8 @@ case "$chosen" in
         ;;
     *)
         # Device selected - toggle connection
-        # Extract device name
-        name=$(echo "$chosen" | sed 's/^󰂱 \|^󰂯 //' | sed 's/ (connected)$//')
+        # Extract device name (remove icon spans)
+        name=$(echo "$chosen" | sed "s/<span[^>]*>[^<]*<\/span> //" | sed 's/ (connected)$//')
 
         # Find MAC address
         mac=$(bluetoothctl devices Paired | grep "$name" | awk '{print $2}')
