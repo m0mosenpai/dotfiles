@@ -110,18 +110,34 @@ separator {
 }
 
 /* Lists */
-list, listview, treeview {
+list, listview, treeview, .view {
     background-color: @bg_color;
     color: @fg_color;
 }
 
-row:hover, list row:hover {
+row:hover, list row:hover, treeview row:hover, .view row:hover {
     background-color: rgba(49, 35, 17, 0.5);
 }
 
-row:selected, list row:selected {
-    background-color: @selected_bg_color;
-    color: @selected_fg_color;
+row:selected, list row:selected, treeview row:selected, .view row:selected,
+treeview:selected, .view:selected,
+row:selected label, treeview row:selected label {
+    background-color: rgba(237, 146, 7, 0.25);
+    color: #EEC07A;
+}
+
+/* Path bar (file chooser breadcrumbs) */
+.path-bar button,
+.path-bar button label {
+    background-color: transparent;
+    color: @fg_color;
+    border: none;
+}
+
+.path-bar button:checked,
+.path-bar button:checked label {
+    background-color: transparent;
+    color: @accent_color;
 }
 
 /* Headerbar */
