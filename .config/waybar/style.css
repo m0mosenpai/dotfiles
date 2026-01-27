@@ -330,18 +330,6 @@ window#waybar.hidden {
 #battery.critical:not(.charging) {
     background-color: #CC241D;
     color: #F9D9A8;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-@keyframes blink {
-    to {
-        background-color: #F9D9A8;
-        color: #CC241D;
-    }
 }
 
 /* ===== TOOLTIP STYLING ===== */
