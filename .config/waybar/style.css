@@ -93,9 +93,17 @@ window#waybar.hidden {
     color: #EEC07A;
 }
 
-#workspaces button.active {
-    background-color: #ED9207;
+#workspaces button.active,
+#workspaces button.active:hover,
+#workspaces button.active:focus,
+#workspaces button.active:active {
+    background: #ED9207;
+    background-image: none;
     color: #171717;
+    border-color: #ED9207;
+    box-shadow: none;
+    text-shadow: none;
+    opacity: 1;
 }
 
 #workspaces button.urgent {
