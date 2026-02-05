@@ -38,4 +38,4 @@ border-color=#ED9207
 background-color=#CC241D
 text-color=#F9D9A8
 border-color=#ED9207
-default-timeout=0
+default-timeout=5000

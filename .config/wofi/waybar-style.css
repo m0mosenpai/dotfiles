@@ -8,6 +8,7 @@
 window {
     background-color: #0c0a06;
     border: 1px solid #ED9207;
+    border-radius: 8px;
 }
 
 #input {
