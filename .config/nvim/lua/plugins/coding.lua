@@ -16,6 +16,39 @@ return {
   { 'L3MON4D3/LuaSnip'},
   { 'mfussenegger/nvim-jdtls' },
 
+  -- GitHub Copilot
+  {
+    "zbirenbaum/copilot.lua",
+    dependencies = {
+      "copilotlsp-nvim/copilot-lsp",
+    },
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = "<M-y>",
+            accept_word = "<C-l>",
+            accept_line = "<M-l>",
+            next = "<M-n>",
+            prev = "<M-p>",
+            dismiss = "<C-]>",
+          },
+        },
+        panel = {
+          enabled = true,
+          auto_refresh = true,
+          keymap = {
+            open = "<M-CR>",
+          },
+        },
+      })
+    end,
+  },
+
   -- Autopairing
   {
     'windwp/nvim-autopairs',
