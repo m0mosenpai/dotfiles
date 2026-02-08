@@ -1,7 +1,12 @@
+require("rose-pine").setup({
+	disable_background = true,
+	disable_italics = true,
+})
+
 function ColorConfig(color)
 	-- color = color or "kanagawa-dragon"
 	-- color = color or "vague"
-	color = color or "rose-pine"
+	color = color or "rose-pine-moon"
 	vim.cmd.colorscheme(color)
 
 	-- Setting transparency
