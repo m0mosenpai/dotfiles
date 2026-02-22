@@ -2,19 +2,24 @@
 
 # Bluetooth menu for wofi - manages bluetooth devices via bluetoothctl
 
+# Helper to run bluetoothctl commands (piped for non-interactive mode)
+btctl() {
+    echo "$1" | bluetoothctl 2>/dev/null
+}
+
 # Check if bluetooth is powered on
-power_status=$(bluetoothctl show | grep "Powered:" | awk '{print $2}')
+power_status=$(btctl "show" | grep "Powered:" | awk '{print $2}')
 
 # Build menu options
 options=""
 
 if [ "$power_status" = "yes" ]; then
-    options+="<span size='large'>󰂲</span> Power Off\n"
-    options+="<span size='x-large'>󰑓</span> Scan for devices\n"
+    options+="<span size='large'>󰂲</span>  Power Off\n"
+    options+="<span size='x-large'>󰑓</span>  Scan for devices\n"
     options+="───────────────\n"
 
     # Get paired devices
-    paired=$(bluetoothctl devices Paired | cut -d' ' -f2-)
+    paired=$(btctl "devices Paired" | grep "^Device" | sed 's/^Device //')
 
     if [ -n "$paired" ]; then
         while read -r line; do
@@ -22,18 +27,18 @@ if [ "$power_status" = "yes" ]; then
             name=$(echo "$line" | cut -d' ' -f2-)
 
             # Check if connected
-            info=$(bluetoothctl info "$mac" 2>/dev/null)
+            info=$(btctl "info $mac")
             if echo "$info" | grep -q "Connected: yes"; then
-                options+="<span size='large'>󰂱</span> $name (connected)\n"
+                options+="<span size='x-large'>󰂱</span>  $name (connected)\n"
             else
-                options+="<span size='large'>󰂯</span> $name\n"
+                options+="<span size='large'>󰂯</span>  $name\n"
             fi
         done <<< "$paired"
     else
         options+="No paired devices\n"
     fi
 else
-    options+="<span size='large'>󰂯</span> Power On\n"
+    options+="<span size='large'>󰂯</span>  Power On\n"
 fi
 
 # Show wofi menu
@@ -44,23 +49,21 @@ chosen=$(echo -e "$options" | wofi --dmenu --prompt "Bluetooth" --width 300 --he
 # Handle selection
 case "$chosen" in
     *"Power Off"*)
-        bluetoothctl power off
+        btctl "power off"
         notify-send "Bluetooth" "Powered off"
         ;;
     *"Power On"*)
-        bluetoothctl power on
+        btctl "power on"
         notify-send "Bluetooth" "Powered on"
         ;;
     *"Scan for devices"*)
         notify-send "Bluetooth" "Scanning for 10 seconds..."
 
-        # Start scanning
         bluetoothctl --timeout 10 scan on &>/dev/null &
-
         sleep 10
 
         # Get all discovered devices
-        devices=$(bluetoothctl devices | cut -d' ' -f2-)
+        devices=$(btctl "devices" | grep "^Device" | sed 's/^Device //')
 
         if [ -z "$devices" ]; then
             notify-send "Bluetooth" "No devices found"
@@ -85,8 +88,6 @@ case "$chosen" in
 
         if [ -n "$mac" ]; then
             notify-send "Bluetooth" "Pairing with $selected..."
-
-            # Try to pair and connect
             bluetoothctl pair "$mac" && \
             bluetoothctl trust "$mac" && \
             bluetoothctl connect "$mac" && \
@@ -95,28 +96,23 @@ case "$chosen" in
         fi
         ;;
     "───────────────"|"No paired devices")
-        # Separator or empty, do nothing
         ;;
     *)
         # Device selected - toggle connection
-        # Extract device name (remove icon spans)
-        name=$(echo "$chosen" | sed "s/<span[^>]*>[^<]*<\/span> //" | sed 's/ (connected)$//')
+        name=$(echo "$chosen" | sed 's/^[^ ]* *//' | sed 's/ (connected)$//')
 
         # Find MAC address
-        mac=$(bluetoothctl devices Paired | grep "$name" | awk '{print $2}')
+        mac=$(btctl "devices Paired" | grep "$name" | awk '{print $2}')
 
         if [ -z "$mac" ]; then
             notify-send "Bluetooth" "Device not found"
             exit 1
         fi
 
-        # Check current connection status
         if echo "$chosen" | grep -q "(connected)"; then
-            # Disconnect
             bluetoothctl disconnect "$mac"
             notify-send "Bluetooth" "Disconnected from $name"
         else
-            # Connect
             notify-send "Bluetooth" "Connecting to $name..."
             if bluetoothctl connect "$mac"; then
                 notify-send "Bluetooth" "Connected to $name"
