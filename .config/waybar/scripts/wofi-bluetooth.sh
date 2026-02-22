@@ -88,21 +88,25 @@ case "$chosen" in
 
         if [ -n "$mac" ]; then
             notify-send "Bluetooth" "Pairing with $selected..."
-            bluetoothctl pair "$mac" && \
-            bluetoothctl trust "$mac" && \
-            bluetoothctl connect "$mac" && \
-            notify-send "Bluetooth" "Connected to $selected" || \
-            notify-send "Bluetooth" "Failed to connect to $selected" -u critical
+            btctl "pair $mac"
+            btctl "trust $mac"
+            result=$(btctl "connect $mac")
+            if echo "$result" | grep -q "Connection successful"; then
+                notify-send "Bluetooth" "Connected to $selected"
+            else
+                notify-send "Bluetooth" "Failed to connect to $selected" -u critical
+            fi
         fi
         ;;
     "───────────────"|"No paired devices")
         ;;
     *)
         # Device selected - toggle connection
-        name=$(echo "$chosen" | sed 's/^[^ ]* *//' | sed 's/ (connected)$//')
+        # Strip pango markup and icons, then trim
+        name=$(echo "$chosen" | sed 's/<[^>]*>//g' | sed 's/^[[:space:]]*[^[:space:]]*[[:space:]]*//' | sed 's/ (connected)$//')
 
         # Find MAC address
-        mac=$(btctl "devices Paired" | grep "$name" | awk '{print $2}')
+        mac=$(btctl "devices Paired" | grep "^Device" | grep -F "$name" | awk '{print $2}')
 
         if [ -z "$mac" ]; then
             notify-send "Bluetooth" "Device not found"
@@ -110,15 +114,24 @@ case "$chosen" in
         fi
 
         if echo "$chosen" | grep -q "(connected)"; then
-            bluetoothctl disconnect "$mac"
-            notify-send "Bluetooth" "Disconnected from $name"
-        else
-            notify-send "Bluetooth" "Connecting to $name..."
-            if bluetoothctl connect "$mac"; then
-                notify-send "Bluetooth" "Connected to $name"
+            bluetoothctl disconnect "$mac" &>/dev/null
+            sleep 1
+            if btctl "info $mac" | grep -q "Connected: yes"; then
+                notify-send "Bluetooth" "Failed to disconnect from $name" -u critical
             else
-                notify-send "Bluetooth" "Failed to connect to $name" -u critical
+                notify-send "Bluetooth" "Disconnected from $name"
             fi
+        else
+            bluetoothctl connect "$mac" &>/dev/null &
+            # Wait for connection to establish
+            for i in $(seq 1 8); do
+                sleep 1
+                if btctl "info $mac" | grep -q "Connected: yes"; then
+                    notify-send "Bluetooth" "Connected to $name"
+                    exit 0
+                fi
+            done
+            notify-send "Bluetooth" "Failed to connect to $name" -u critical
         fi
         ;;
 esac
