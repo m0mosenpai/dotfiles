@@ -59,7 +59,7 @@
     },
 
     "bluetooth": {
-        "format": "<span size='large'>󰂯</span> Disconnected",
+        "format": "<span size='large'>󰂯</span> -",
         "format-connected": "<span size='large'>󰂱</span> {device_alias}",
         "format-connected-battery": "<span size='large'>󰂱</span> {device_alias}",
         "format-disabled": "<span size='large'>󰂲</span> Off",
@@ -75,7 +75,7 @@
     "network": {
         "interface": "wl*",
         "format-wifi": "<span size='x-large'>󰤨</span><span rise='1500'> {essid}</span>",
-        "format-disconnected": "<span size='x-large'>󰤭</span><span rise='1500'> Disconnected</span>",
+        "format-disconnected": "<span size='x-large'>󰤭</span><span rise='1500'> -</span>",
         "format-ethernet": "<span size='x-large'>󰈀</span><span rise='1500'> {ifname}</span>",
         "on-click": "~/.config/waybar/scripts/wofi-wifi.sh",
         "on-click-right": "nm-connection-editor",
