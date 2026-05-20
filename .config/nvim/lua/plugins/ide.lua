@@ -1,13 +1,15 @@
 return {
   -- Fuzzy finder
   {
-      'nvim-telescope/telescope.nvim', version = '0.1.8',
+      'nvim-telescope/telescope.nvim', version = '0.2.1',
       dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
   -- Synax Highlighting and Navigating
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate'
   },
 
